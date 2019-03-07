@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EventBus;
 using Microsoft.AspNetCore.Mvc;
+using Service1.EventBus1;
 
 namespace Service1.Controllers
 {
@@ -10,10 +12,17 @@ namespace Service1.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly IEventBus _eventBus;
+        public ValuesController(IEventBus eventBus)
+        {
+            _eventBus = eventBus;
+        }
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
+            var @event = new Service1Event() { ServiceName = "service1" };
+            _eventBus.Punlish(@event);
             return new string[] { "value1", "value2" };
         }
 
