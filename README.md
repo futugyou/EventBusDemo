@@ -1,2 +1,3 @@
 # EventBusDemo
 EventBus from eShopOnContainers 
+本来想实现下servicebus和db存储发布的方式，算了写个memory练练手
